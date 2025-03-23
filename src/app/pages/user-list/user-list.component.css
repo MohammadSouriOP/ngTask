@@ -1,0 +1,23 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background-color: #10b981; /* emerald-500 */
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.floating-btn:hover {
+  transform: translateY(-2px);
+  background-color: #059669; /* emerald-600 */
+}

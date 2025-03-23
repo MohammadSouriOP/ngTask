@@ -1,0 +1,18 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px;
+  overflow-y: auto;
+}

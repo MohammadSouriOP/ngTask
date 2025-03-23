@@ -1,0 +1,21 @@
+<h2>{{ isEdit ? 'Edit User' : 'Create New User' }}</h2>
+
+<app-input label="Name" [(model)]="user.name"></app-input>
+<app-input label="Email" [(model)]="user.email"></app-input>
+<app-input label="Company" [(model)]="user.company.name"></app-input>
+
+<br />
+
+<app-button
+  label="Save"
+  icon="pi pi-check"
+  (click)="save()"
+  severity="success"
+></app-button>
+
+<app-button
+  label="Cancel"
+  icon="pi pi-times"
+  (click)="location.back()"
+  severity="secondary"
+></app-button>
