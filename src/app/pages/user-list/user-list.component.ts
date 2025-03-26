@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { UserService } from "../../services/user-service";
 import { ButtonComponent } from "../../shared/button/button.component";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { SearchService } from "../../services/search-service";
 
 @Component({
   selector: "app-userlist",
@@ -26,24 +27,33 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
 })
 export class UserListComponent implements OnInit {
   users: any[] = [];
+  allUsers: any[] = [];
   loading: boolean = true;
+  searchTerm: string = "";
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.loadUsers();
     }, 2000);
+
+    this.searchService.searchTerm$.subscribe((term) => {
+      this.searchTerm = term;
+      this.applyFilter();
+    });
   }
 
   loadUsers(): void {
     this.userService.getUsers().subscribe({
       next: (data: any[]) => {
-        this.users = data;
+        this.allUsers = data;
+        this.users = [...data];
         this.loading = false;
         console.log("Users loaded:", this.users);
       },
@@ -52,6 +62,21 @@ export class UserListComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  applyFilter(): void {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) {
+      this.users = [...this.allUsers];
+      return;
+    }
+
+    this.users = this.allUsers.filter(
+      (user) =>
+        user.name?.toLowerCase().includes(term) ||
+        user.username?.toLowerCase().includes(term) ||
+        user.email?.toLowerCase().includes(term)
+    );
   }
 
   createUser(): void {
@@ -68,7 +93,8 @@ export class UserListComponent implements OnInit {
       header: "Confirm Delete",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.users = this.users.filter((u) => u.id !== user.id);
+        this.allUsers = this.allUsers.filter((u) => u.id !== user.id);
+        this.applyFilter();
         console.log("User deleted:", user);
       },
     });
