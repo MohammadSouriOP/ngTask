@@ -1,21 +1,47 @@
-<h2>{{ isEdit ? 'Edit User' : 'Create New User' }}</h2>
 
-<app-input label="Name" [(model)]="user.name"></app-input>
-<app-input label="Email" [(model)]="user.email"></app-input>
-<app-input label="Company" [(model)]="user.company.name"></app-input>
+<div class="user-form-container">
+  <h2 class="form-title">{{ isEdit ? 'Edit User' : 'Create New User' }}</h2>
 
-<br />
+  <section class="form-section">
+    <h3>User Info</h3>
+    <div class="form-row">
+      <app-input label="Name" [(model)]="user.name" [required]="true" placeholder="Enter name"></app-input>
+      <app-input label="Username" [(model)]="user.username" [required]="true" placeholder="Enter username"></app-input>
+    </div>
+    <div class="form-row">
+      <app-input label="Phone" [(model)]="user.phone" placeholder="Enter phone number"></app-input>
+      <app-input label="Email" [(model)]="user.email" [required]="true" placeholder="Enter email"></app-input>
+    </div>
+    <div class="form-row">
+      <app-input label="Website" [(model)]="user.website" placeholder="Enter website"></app-input>
+    </div>
+  </section>
 
-<app-button
-  label="Save"
-  icon="pi pi-check"
-  (click)="save()"
-  severity="success"
-></app-button>
+  <section class="form-section">
+    <h3>Address</h3>
+    <div class="form-row">
+      <app-input label="Street" [(model)]="address.street" [required]="true" placeholder="Enter street"></app-input>
+      <app-input label="Suite" [(model)]="address.suite" placeholder="Enter suite"></app-input>
+    </div>
+    <div class="form-row">
+      <app-dropdown [(selectedCountry)]="address.country" [required]="true"></app-dropdown>
+      <app-input label="Zip Code" [(model)]="address.zipCode" [required]="true" placeholder="Enter zip"></app-input>
+    </div>
+  </section>
 
-<app-button
-  label="Cancel"
-  icon="pi pi-times"
-  (click)="location.back()"
-  severity="secondary"
-></app-button>
+  <section class="form-section">
+    <h3>Company Info</h3>
+    <div class="form-row">
+      <app-input label="Company Name" [(model)]="company.companyName" [required]="true" placeholder="Enter company name"></app-input>
+      <app-input label="Catch Phrase" [(model)]="company.catchPhrase" placeholder="Enter catch phrase"></app-input>
+    </div>
+    <div class="form-row">
+      <app-input label="Business" [(model)]="company.business" placeholder="Enter business"></app-input>
+    </div>
+  </section>
+
+  <div class="form-buttons">
+    <app-button label="Save" icon="pi pi-check" severity="primary" (click)="save()"></app-button>
+    <app-button label="Cancel" icon="pi pi-times" severity="secondary" (click)="cancel()"></app-button>
+  </div>
+</div>

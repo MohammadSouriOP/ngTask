@@ -1,27 +1,40 @@
-import { Component } from '@angular/core';
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { DropdownModule } from "primeng/dropdown";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-dropdown',
+  selector: "app-dropdown",
   standalone: true,
-  imports: [DropdownModule, FormsModule],
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css'],
+  imports: [DropdownModule, FormsModule, CommonModule],
+  templateUrl: "./dropdown.component.html",
+  styleUrls: ["./dropdown.component.css"],
 })
 export class DropdownComponent {
+  @Input() selectedCountry: any;
+  @Output() selectedCountryChange = new EventEmitter<any>();
+  @Input() required: boolean = false;
+
+  errorMessage: string = "";
+
   countries = [
-    { name: 'Jordan', code: 'JO' },
-    { name: 'United States', code: 'US' },
-    { name: 'Germany', code: 'DE' },
-    { name: 'France', code: 'FR' },
-    { name: 'United Kingdom', code: 'UK' },
-    { name: 'Canada', code: 'CA' },
-    { name: 'Australia', code: 'AU' },
-    { name: 'Italy', code: 'IT' },
-    { name: 'Spain', code: 'ES' },
-    { name: 'Netherlands', code: 'NL' }
+    { label: "Jordan", value: "JO" },
+    { label: "United States", value: "US" },
+    { label: "Germany", value: "DE" },
+    { label: "France", value: "FR" },
+    { label: "United Kingdom", value: "UK" },
+    { label: "Canada", value: "CA" },
+    { label: "Australia", value: "AU" },
+    { label: "Italy", value: "IT" },
+    { label: "Spain", value: "ES" },
+    { label: "Netherlands", value: "NL" },
   ];
 
-  selectedCountry: any;
+  validate(): void {
+    if (this.required && !this.selectedCountry) {
+      this.errorMessage = "Country is required";
+    } else {
+      this.errorMessage = "";
+    }
+  }
 }

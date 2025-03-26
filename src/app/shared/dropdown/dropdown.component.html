@@ -1,6 +1,11 @@
-<p-dropdown
-  [options]="countries"
-  [(ngModel)]="selectedCountry"
-  optionLabel="name"
-  placeholder="Select a Country"
-></p-dropdown>
+<div class="dropdown-container">
+  <p-dropdown
+    [options]="countries"
+    [(ngModel)]="selectedCountry"
+    (ngModelChange)="selectedCountryChange.emit($event)"
+    optionLabel="label"
+    optionValue="value"
+    placeholder="Select a country"
+  ></p-dropdown>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

@@ -1,1 +1,7 @@
-<p-panelMenu [model]="items"></p-panelMenu>
+<div class="sidebar">
+  <ul class="menu">
+    <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a [routerLink]="['/users']">👤 Users</a>
+    </li>
+  </ul>
+</div>

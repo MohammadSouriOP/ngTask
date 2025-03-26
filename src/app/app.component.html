@@ -1,9 +1,8 @@
 <app-navbar></app-navbar>
-
-<div class="layout">
-  <app-sidebar (toggleUsers)="toggleUsersSection()"></app-sidebar>
-  <div class="content">
-    <!-- <app-userlist *ngIf="showUsers"></app-userlist>  -->
+<div class="app-container">
+  <app-sidebar></app-sidebar>
+  <div class="content-container">
     <router-outlet></router-outlet>
   </div>
 </div>
+<p-toast></p-toast>

@@ -1,34 +1,54 @@
-<div class="toolbar">
-  <app-button
-    label="Create"
-    icon="pi pi-plus"
-    (click)="createUser()" 
-  ></app-button>
+<div *ngIf="loading" class="loader-container">
+  <p-progressSpinner></p-progressSpinner>
 </div>
+<div *ngIf="!loading">
+  <div class="toolbar">
+    <app-button
+      label="Create User"
+      icon="pi pi-plus"
+      (click)="createUser()"
+    ></app-button>
+  </div>
 
-<p-table [value]="users" [paginator]="true" [rows]="5">
-  <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
-    <tr>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.company?.name }}</td>
-      <td>
-        <app-button
-          icon="pi pi-ellipsis-v"
-          class="p-button-text p-button-rounded p-button-sm"
-          (click)="openMenu($event, user, rowIndex)"
-        ></app-button>
+  <p-table
+    [value]="users"
+    [paginator]="true"
+    [rows]="5"
+    [rowHover]="true"
+    [responsiveLayout]="'scroll'"
+    class="p-datatable-striped"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
 
-        <p-menu
-          #menuRef
-          [popup]="true"
-          [model]="menuItems"
-        ></p-menu>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.company?.name }}</td>
+        <td>
+          <app-button
+            icon="pi pi-pencil"
+            class="p-button-text"
+            (click)="editUser(user)"
+          ></app-button>
+          <app-button
+            icon="pi pi-trash"
+            class="p-button-text"
+            (click)="confirmDelete(user)"
+          ></app-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-
-
-<p-confirmDialog></p-confirmDialog>
+  <p-confirmDialog></p-confirmDialog>
+</div>

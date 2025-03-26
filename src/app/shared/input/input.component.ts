@@ -1,21 +1,33 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: 'app-input',
+  selector: "app-input",
   standalone: true,
-  imports: [CommonModule, InputTextModule, FormsModule],
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css'],
+  imports: [CommonModule, FormsModule],
+  templateUrl: "./input.component.html",
+  styleUrls: ["./input.component.css"],
 })
 export class InputComponent {
-  @Input() label = '';
-  @Input() model: string = '';
+  @Input() label: string = "";
+  @Input() placeholder: string = "";
+  @Input() required: boolean = false;
+  @Input() model: string = "";
   @Output() modelChange = new EventEmitter<string>();
 
-  onModelChange(value: string) {
-    this.modelChange.emit(value);
+  errorMessage: string = "";
+
+  validate(): void {
+    if (this.required && !this.model?.trim()) {
+      this.errorMessage = `${this.label} is required`;
+    } else {
+      this.errorMessage = "";
+    }
+  }
+
+  onInputChange(): void {
+    this.modelChange.emit(this.model);
+    this.validate();
   }
 }

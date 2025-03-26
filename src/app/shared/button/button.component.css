@@ -1,0 +1,14 @@
+:host ::ng-deep .p-button.p-button-primary {
+  background-color: #007bff !important;
+  border: none !important;
+  color: white !important;
+}
+
+:host ::ng-deep .p-button.p-button-primary:hover {
+  background-color: #0056d2 !important;
+  color: white !important;
+}
+:host ::ng-deep .p-button:hover {
+  background-color: #0056d2 !important;
+  color: white !important;
+}

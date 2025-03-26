@@ -1,9 +1,12 @@
-<div class="form-group">
-  <label>{{ label }}</label>
+<div class="input-container">
+  <label for="input">{{ label }}</label>
   <input
-    type="text"
-    pInputText
-    [ngModel]="model"
-    (ngModelChange)="onModelChange($event)"
+    id="input"
+    [(ngModel)]="model"
+    (ngModelChange)="onInputChange()"
+    [placeholder]="placeholder"
+    [required]="required"
+    class="input-field"
   />
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </div>

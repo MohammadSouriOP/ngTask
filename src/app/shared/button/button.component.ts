@@ -1,33 +1,32 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [ButtonModule, CommonModule],
+  imports: [ButtonModule],
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
+  styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Input() icon: string = '';
   @Input() label: string = '';
+  @Input() icon: string = '';
   @Input() class?: string;
+  @Input() style?: string | { [klass: string]: any };
   @Input() severity?:
+    | 'primary'
+    | 'secondary'
     | 'success'
     | 'info'
     | 'warn'
     | 'danger'
     | 'help'
-    | 'primary'
-    | 'secondary'
     | 'contrast'
     | null;
+  @Input() disabled: boolean = false;
 
-  @Input() disabled?: boolean;
-  @Input() iconPos: 'left' | 'right' = 'left';
-  @Input() type: 'button' | 'submit' = 'button';
   @Output() click = new EventEmitter<MouseEvent>();
+
   onClick(event: MouseEvent) {
     this.click.emit(event);
   }
