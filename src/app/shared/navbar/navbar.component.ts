@@ -26,7 +26,7 @@ import { SearchService } from "../../services/search-service";
 })
 export class NavbarComponent implements OnInit {
   items: MenuItem[] | undefined;
-  searchText: string = "";
+  searchText: any = "";
 
   constructor(private searchService: SearchService) {}
 

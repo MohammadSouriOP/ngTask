@@ -23,7 +23,7 @@ import { UserListComponent } from "./pages/user-list/user-list.component";
 export class AppComponent {
   searchTerm: string = "";
 
-  onSearch(term: string) {
+  onSearch(term: any) {
     this.searchTerm = term;
   }
 }
